@@ -1,0 +1,123 @@
+{% extends 'fees/base.html' %}
+{% block content %}
+
+  <main >
+    <div class="container">
+
+      <!--Section: Jumbotron-->
+      <section class="card wow fadeIn" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/gradient1.jpg);">
+
+        <!-- Content -->
+        <div class="card-body text-white text-center py-5 px-5 my-5">
+
+          <h1 class="mb-4">
+            <strong>Ebay and Paypal fee  Calculator</strong>
+          </h1>
+          <p>
+            <strong>A Calculator that will help you sell on ebay with a good profit</strong>
+          </p>
+          <p class="mb-4">
+            <strong>CALCULATE FINAL VALUE FEES & PROFIT WHEN SELLING ON EBAY.COM!
+              UP-TO-DATE AS OF APRIL 14 2020.</strong>
+          </p>
+          <a  href="{% url 'feescalc' %}" class="btn btn-outline-black btn-lg">CALCULATE HERE
+            <i class="fas fa-graduation-cap ml-2"></i>
+          </a>
+
+        </div>
+        <!-- Content -->
+      </section>
+      <!--Section: Jumbotron-->
+
+      <hr class="my-5">
+
+      <!--Section: Cards-->
+      <section class="text-center">
+        <h3>EBAY FEES</h3>
+        <h4 style="color: brown;">NON-STORE SUBSCRIBER & STARTER STORE</h4>
+        <p>The maximum fee caps do not apply to the additional final value fees charged to sellers who <a href="https://www.ebay.com/help/selling/selling-fees/store-fees?id=4122#performance">don't meet eBay's performance expectations.</a></p>
+        <table class="default js-table-data table">
+          <thead>
+            <tr>
+              <th>Store Category</th>
+              <th>Normal Rate</th>
+              <th>Top Rated Seller</th>
+            </tr></thead><tbody>
+              <tr>
+                <td>Books<br> DVDs &amp; Movies<br> Music (except Records category)</td>
+                <td>12.00%<br> (maximum fee $750)</td><td>10.80%</td>
+              </tr>
+              <tr><td>Musical Instruments &amp; Gear &gt; <strong>Guitars &amp; Basses</strong></td>
+                <td>3.50%<br> (maximum fee $300)</td>
+                <td>1.80%</td>
+              </tr>
+              <tr>
+                <td>Heavy Equipment Parts &amp; Attachments &gt; <strong>Heavy Equipment</strong><br> Printing &amp; Graphic Arts &gt; <strong>Commercial Printing Presses</strong><br> Restaurant &amp; Food Service &gt; <strong>Food Trucks, Trailers &amp; Carts</strong></td>
+                <td>2.00%<br> (maximum fee $350)</td><td>1.80%</td>
+              </tr>
+              <tr>
+                <td>Other Categories</td>
+                <td>10.00%<br> (maximum fee $750)</td
+                  ><td>9.00%</td>
+                </tr>
+              </tbody>
+        </table>
+        <h4 style="color: brown;">BASIC, PREMIUM, ANCHOR, AND ENTERPRISE STORE</h4>
+        <p>The maximum fee cap is $250. But maximum fee caps do not apply to the additional final value fees charged to sellers who <a href="https://www.ebay.com/help/selling/selling-fees/store-fees?id=4122#performance">don't meet eBay's performance expectations.</a></p>
+        <table class="default js-table-data table">
+          <thead>
+            <tr>
+              <th>Store Category</th>
+              <th>Normal Rate</th>
+              <th>Top Rated Seller</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Books<br> DVDs &amp; Movies<br> Music (except Records category)</td>
+              <td>12.00%</td><td>10.80%</td>
+            </tr>
+            <tr>
+              <td>Motors &gt; Automotive Tools &amp; Supplies<br> Motors &gt; Parts &amp; Accessories (except Apparel &amp; Merchandise and In-Car Technology, GPS &amp; Security categories)</td>
+              <td>8.15%</td>
+              <td>7.335%</td>
+            </tr>
+            <tr>
+              <td>Musical Instruments &amp; Gear</td>
+              <td>7.15%</td>
+              <td>6.435%</td>
+            </tr>
+            <tr>
+              <td>Cameras &amp; Photo<br> Cell Phones &amp; Accessories<br> Coins &amp; Paper Money<br> Computers/Tablets &amp; Networking<br> Consumer Electronics<br> Motors &gt; Parts &amp; Accessories &gt; In-Car Technology, GPS &amp; Security<br> Musical Instruments &amp; Gear &gt; DJ Equipment<br> Musical Instruments &amp; Gear &gt; Pro Audio Equipment<br> Stamps<br> Most Video Games &amp; Consoles categories</td><td>6.15%</td>
+              <td>5.535%</td>
+            </tr>
+            <tr>
+              <td>Desktops &amp; All-In-Ones<br> Laptops &amp; Netbooks<br> Tablets &amp; eBook Readers<br> Computer Components &amp; Parts &gt; CPUs/Processors<br> Computer Components &amp; Parts &gt; Memory (RAM)<br> Computer Components &amp; Parts &gt; Motherboards<br> Computer Components &amp; Parts &gt; Motherboards &amp; CPU combos<br> Drives, Storage &amp; Blank Media &gt; Hard Drives (HDD, SDD &amp; NAS)<br> Monitors, Projectors &amp; Accessories &gt; Monitors<br> Printers, Scanners, &amp; Supplies &gt; Printers<br> Video Games &amp; Consoles &gt; Video Games</td>
+              <td>4%</td><td>3.6%</td>
+            </tr>
+            <tr>
+              <td>Musical Instruments &amp; Gear &gt; Guitars &amp; Basses</td>
+              <td>3.50%</td>
+              <td>3.15%</td>
+            </tr>
+            <tr>
+              <td>Heavy Equipment, Parts &amp; Attachments &gt; Heavy Equipment<br> Printing &amp; Graphic Arts &gt; Commercial Printing Presses<br> Restaurant &amp; Food Service &gt; Food Trucks, Trailers &amp; Carts</td>
+              <td>1.5%</td>
+              <td>1.35%</td>
+            </tr>
+            <tr>
+              <td>Other Categories</td>
+              <td>9.15%</td>
+              <td>9%</td>
+            </tr></tbody>
+          </table>
+      </section>
+      <!--Section: Cards-->
+
+    </div>
+  </main>
+  <!--Main layout-->
+
+  <!--Footer-->
+ 
+{% endblock %}

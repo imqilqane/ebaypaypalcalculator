@@ -1,0 +1,176 @@
+{% extends 'fees/base.html' %}
+{% block content %}
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          
+            <div class="contact-form">
+              <div class="input-fields">
+              <form method="POST" >{% csrf_token %}
+              <div class="d-block my-3">
+                <div class="form-check">
+                  {% for name in feesForm.listing_type %}
+                  <div>
+                    {{name}}
+                  </div>         
+                  {% endfor %}     
+                </div>
+              </div>
+                      {{feesForm.buying_cost}}
+                      {{feesForm.silling_price}}
+                      {{feesForm.quantity}}
+                      {{feesForm.Shipping_cost}}
+                      {{feesForm.Shipping_price}}
+                      {{feesForm.stor_type}}
+                      {{feesForm.product_category}}
+                      <p><label for="id_subject" class="mt-2">Paypal rate:</label>
+                        {{feesForm.Paypal_rate}}</p>
+                      <!-- {{feesForm.top_rated}} -->
+                      <div class="custom-control custom-checkbox">
+                        <input name="top_rated" type="checkbox" class="custom-control-input" name="top_rated" id="top_rated">
+                        <label class="custom-control-label" for="top_rated"><b>Top rated seller</b> </label>
+                      </div>
+                     
+                <button class="mt-3 btn btn-warning" type="submit">CALC FEES</button>
+              </form>
+              </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="card indigo text-center z-depth-2">
+          <div class="card-body">
+            <div id="myChart">
+
+            </div>
+          </div>
+        </div>
+        <div id="sectionProceeds">
+          <div class="card mt-2">
+            <div class="card-body">
+              <div class="row no-gutters" title="This value is the sum of all payments from the buyer: item price and shipping price.  For auctions, this value will be zero if the closing price is below the starting or reserve price.">
+                <div class="col-7"><h4>Proceeds</h4>
+                </div>
+                <div class="col-5 text-right"><h4 id="totalProceeds">{{proceeds}}&nbsp;$US</h4>
+                </div>
+              </div>
+              <div class="row no-gutters text-muted">
+                <div class="col-7"><h6>Sales</h6>
+                </div>
+                <div class="col-5 text-right"><h6 id="totalSales">{{silling_price}}&nbsp;$US</h6>
+                </div>
+              </div>
+              {% if Shipping_price %}
+              <div class="row no-gutters text-muted ">
+                <div class="col-7"><h6>Shipping</h6>
+
+                </div>
+                <div class="col-5 text-right"><h6 id="totalShipping">{{Shipping_price}}&nbsp;$US</h6>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div id="sectionResultCosts">
+          <div class="card mt-2">
+            <div class="card-body">
+              <div class="row no-gutters" title="This value is the sum of all expenses incurred for the eBay listing, given the variables you supply.  This value includes item cost, cost to ship, eBay fees, and PayPal fees.">
+                <div class="col-7"><h4>Costs</h4>
+                </div>
+                <div class="col-5 text-right"><h4 id="totalCost">{{costs}}&nbsp;$US</h4>
+                </div>
+              </div>
+              
+              <div class="row no-gutters text-muted ">
+                <div class="col-7"><h6>Item</h6>
+                </div>
+                <div class="col-5 text-right"><h6 id="totalItemCost">{{buying_cost}}&nbsp;$US</h6>
+                </div>
+              </div>
+              {% if Shipping_cost %}
+              <div class="row no-gutters text-muted ">
+                <div class="col-7"><h6>Shipping</h6>
+                </div>
+                <div class="col-5 text-right"><h6 id="totalShippingCost">{{Shipping_cost}}&nbsp;$US</h6>
+                </div>
+              </div>
+              {% endif %}
+              <div class="row no-gutters text-muted d-none">
+                <div class="col-7"><h6>Miscellaneous</h6>
+                </div>
+                <div class="col-5 text-right"><h6 id="totalMiscCost">0,00&nbsp;$US</h6>
+                </div>
+              </div>
+              <div class="row no-gutters text-muted" title="The sum of all eBay fees.">
+                <div class="col-7"><h6><a href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4364" title="eBay fee information">eBay fees</a></h6>
+                </div>
+                <div class="col-5 text-right"><h6 id="totalEbayFees">{{ebay_fees}}&nbsp;$US</h6>
+                </div>
+              </div>
+              <div class="row no-gutters text-muted">
+                <div class="col-7"><h6><a href="https://www.paypal.com/us/webapps/mpp/merchant-fees" title="PayPal fee information">PayPal fee</a></h6>
+                </div>
+                <div class="col-5 text-right"><h6 id="paypalFee">{{paypal_fees}}&nbsp;$US</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="sectionNetProfit">
+          <div class="card mt-2">
+            <div class="card-body">
+              <div class="row no-gutters" title="This value is the amount that you will actually be making or losing for selling your item on eBay, given the variables you supply.">
+                <div class="col-5 text-success"><h4>Net Profit</h4>
+                </div>
+                <div class="col-7 text-right"><h4 id="netProfit" class="text-success">{{profit}}&nbsp;$US</h4>
+                </div>
+                <div class="target col-12 text-center" title="This line indicates what sale price is needed to meet the desired net profit you specified.">
+                  <div class="fail d-none">
+                    <h5>Sorry, we weren't able to find a sale price to meet your goal of <span class="goal-price-fail">$5</span> net profit.</h5>
+                  </div>
+                  <div class="success">
+                    <!-- <h5><span class="goal-text text-success">To net {{net_profit}}&nbsp;$US</span>, you should have a sale price of <a class="goal-price target-value" href="?m=0&amp;t=0&amp;c=0&amp;st=1&amp;b=43&amp;s=32&amp;r=54&amp;cp=54&amp;sp=0&amp;q=1&amp;ct=0&amp;sc=0&amp;mc=0&amp;g=5&amp;pt=0&amp;pl=1&amp;pe=2.9&amp;pf=0.3&amp;asp=0&amp;o=0" title="Set the listing to this price." rel="nofollow" data-value="6.58">&nbsp;$US</a></h5> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card indigo  z-depth-2 mt-3">
+      </div>
+    </div>    
+</section>
+<!-- Footer -->
+<script>
+  var chartData = {
+  type:'hbar',
+  plot: {
+    stacked: true,
+  },
+  "scale-x":{
+      "values":[
+        "Proceeds",
+        "Costs",
+        "Net Profit"
+        ]
+  },
+  "series": [
+  { values: [parseFloat('{{silling_price}}'),parseFloat('{{ebay_fees}}'),parseFloat('{{profit}}')], stack:1},
+  {values: [parseFloat('{{Shipping_price}}'),parseFloat('{{paypal_fees}}')],stack:1},
+  {values: [0,parseFloat('{{buying_cost }}')],stack:1},
+  {values: [0,parseFloat('{{Shipping_cost}}')],stack:1},
+  ]
+}
+  zingchart.render({
+  id: 'myChart',
+  data:  chartData ,
+  height: 300, // Set to 100% to fully scale to parent container
+  width: '100%', // Default
+  output: 'svg', // Default
+  customprogresslogo: 'bl', // Placement of ZingChart watermark
+});
+ 
+</script>
+{% endblock %}
